@@ -1,10 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
 import HomePage from './pages/HomePage';
 import MonitoringPage from './pages/MonitoringPage';
 import ResultPage from './pages/ResultPage';
+import LoginPage from './pages/LoginPage';
 import Navigation from './components/Navigation';
 
 const theme = createTheme({
@@ -27,6 +27,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/monitoring" element={<MonitoringPage />} />
             <Route path="/result" element={<ResultPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
           <Navigation />
         </div>

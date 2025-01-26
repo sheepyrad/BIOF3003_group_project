@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, CircularProgress, LinearProgress } from '@mui/material';
+import { Box, Typography, LinearProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const MonitoringPage = () => {
@@ -37,13 +37,27 @@ const MonitoringPage = () => {
       <Typography variant="h4" sx={{ mb: 2, fontWeight: 500 }}>Monitoring...</Typography>
       <Typography variant="h6" sx={{ mb: 3, fontWeight: 400 }}>Please remain still and steady</Typography>
       <Box sx={{ width: '80%', mb: 4 }}>
-        <LinearProgress variant="determinate" value={progress} sx={{ height: 8, borderRadius: 4 }} />
+        <LinearProgress 
+          variant="determinate" 
+          value={progress} 
+          sx={{ 
+            height: 8, 
+            borderRadius: 4,
+            backgroundColor: 'rgba(255, 255, 255, 0.3)',
+            '& .MuiLinearProgress-bar': {
+              backgroundColor: 'white'
+            }
+          }} 
+        />
       </Box>
       <Box 
         sx={{ 
           position: 'relative', 
           width: 200, 
           height: 200,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -69,34 +83,48 @@ const MonitoringPage = () => {
           }
         }}
       >
-        <img 
-          src="/heart-icon.svg" 
-          alt="Heart"
-          style={{
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            padding: '20px',
-            boxSizing: 'border-box',
-          }}
-        />
-        <CircularProgress
-          size={200}
-          thickness={2}
+        <Box
           sx={{
-            position: 'absolute',
-            color: 'rgba(255, 255, 255, 0.5)',
-            animation: 'rotate 2s linear infinite',
-            '@keyframes rotate': {
-              '0%': {
-                transform: 'rotate(0deg)'
-              },
-              '100%': {
-                transform: 'rotate(360deg)'
-              }
-            }
+            width: 160,
+            height: 160,
+            borderRadius: '50%',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            zIndex: 1
           }}
-        />
+        >
+          <img 
+            src="/heart-icon.svg" 
+            alt="Heart"
+            style={{
+              width: '70%',
+              height: '70%',
+              opacity: 0.8
+            }}
+          />
+        </Box>
+      </Box>
+      <Box
+        onClick={() => navigate('/')}
+        sx={{
+          mt: 4,
+          px: 4,
+          py: 1.5,
+          borderRadius: 2,
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          cursor: 'pointer',
+          transition: 'background-color 0.2s',
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.3)'
+          }
+        }}
+      >
+        <Typography variant="button" sx={{ color: 'white', fontWeight: 500 }}>
+          Cancel
+        </Typography>
       </Box>
     </Box>
   );
