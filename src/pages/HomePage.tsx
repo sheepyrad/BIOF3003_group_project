@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Box, Typography, Paper, Link, Button } from '@mui/material';
 import { FavoriteOutlined, Lock, LogoutOutlined } from '@mui/icons-material';
 import HeartRateChart from '../components/HeartRateChart';
 import { useNavigate } from 'react-router-dom';
 
-const HomePage = () => {
+const HomePage: FC = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem('isLoggedIn') === 'true');
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(localStorage.getItem('isLoggedIn') === 'true');
 
   useEffect(() => {
-    const handleStorageChange = () => {
+    const handleStorageChange = (): void => {
       setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
     };
 

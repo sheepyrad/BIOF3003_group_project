@@ -1,13 +1,14 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider, createTheme, Theme } from '@mui/material';
 import HomePage from './pages/HomePage';
 import MonitoringPage from './pages/MonitoringPage';
 import ResultPage from './pages/ResultPage';
 import LoginPage from './pages/LoginPage';
 import Navigation from './components/Navigation';
+import { FC } from 'react';
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#1976d2',
@@ -18,7 +19,7 @@ const theme = createTheme({
   },
 });
 
-function App() {
+const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>

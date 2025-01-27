@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, LinearProgress } from '@mui/material';
+import { Box, Typography, LinearProgress, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const MonitoringPage = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const MonitoringPage = () => {
     >
       <Typography variant="h4" sx={{ mb: 2, fontWeight: 500 }}>Monitoring...</Typography>
       <Typography variant="h6" sx={{ mb: 3, fontWeight: 400 }}>Please remain still and steady</Typography>
-      <Box sx={{ width: '80%', mb: 4 }}>
+      <Box sx={{ width: '80%', mb: 4, position: 'relative' }}>
         <LinearProgress 
           variant="determinate" 
           value={progress} 
@@ -49,40 +50,42 @@ const MonitoringPage = () => {
             }
           }} 
         />
+        <Typography 
+          variant="body2" 
+          sx={{ 
+            position: 'absolute', 
+            right: -40, 
+            top: '50%', 
+            transform: 'translateY(-50%)',
+            color: 'white',
+            fontWeight: 500
+          }}
+        >
+          {`${Math.round(progress)}%`}
+        </Typography>
       </Box>
-      <Box 
-        sx={{ 
-          position: 'relative', 
-          width: 200, 
-          height: 200,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            animation: 'pulse 2s infinite'
-          },
-          '@keyframes pulse': {
-            '0%': {
-              transform: 'scale(0.95)',
-              boxShadow: '0 0 0 0 rgba(255, 255, 255, 0.3)'
-            },
-            '70%': {
-              transform: 'scale(1)',
-              boxShadow: '0 0 0 20px rgba(255, 255, 255, 0)'
-            },
-            '100%': {
-              transform: 'scale(0.95)',
-              boxShadow: '0 0 0 0 rgba(255, 255, 255, 0)'
-            }
-          }
+      <motion.div
+        initial={{ scale: 0.9 }}
+        animate={{ 
+          scale: [0.9, 1, 0.9],
+          rotate: [0, 180, 360]
+        }}
+        transition={{ 
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
         }}
       >
+        <Box 
+          sx={{ 
+            position: 'relative', 
+            width: 200, 
+            height: 200,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
         <Box
           sx={{
             width: 160,
@@ -107,6 +110,7 @@ const MonitoringPage = () => {
           />
         </Box>
       </Box>
+      </motion.div>
       <Box
         onClick={() => navigate('/')}
         sx={{
